@@ -1,0 +1,8 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Index";
+    var userFullName = HttpContextAccessor.HttpContext?.Session.GetString("UserName");
+}
+
+<h1>@userFullName</h1>
+
