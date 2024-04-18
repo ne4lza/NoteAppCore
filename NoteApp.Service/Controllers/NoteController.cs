@@ -17,16 +17,16 @@ namespace NoteApp.Service.Controllers
             _context = context;
         }
 
-        [HttpGet("{notesId}")]
+        [HttpGet("List/{notesId}")]
         public ActionResult<List<Note>> GetNotes(int notesId)
         {
-            var query = _context.TBL_Notes.Where(x => x.UserId == notesId).ToList();
+            var query = _context.TBL_Notes.Where(x => x.UserId == notesId).ToList().OrderByDescending(x=>x.Id);
             return Ok(query);
         }
         [HttpGet("{noteId}")]
         public ActionResult GetNotesById(int noteId)
         {
-            var query = _context.TBL_Notes.Where(x => x.UserId == noteId).FirstOrDefault();
+            var query = _context.TBL_Notes.Where(x => x.Id == noteId).FirstOrDefault();
             return Ok(query);
         }
         [HttpPost("AddNote")]
@@ -37,6 +37,7 @@ namespace NoteApp.Service.Controllers
                 Content = addNoteDto.Content,
                 Title = addNoteDto.Title,
                 UserId = addNoteDto.UserId,
+                CreatedDate = DateTime.Now,
 
             };
             _context.TBL_Notes.Add(note);
@@ -52,6 +53,7 @@ namespace NoteApp.Service.Controllers
                 Content = updateNoteDTO.Content,
                 Title = updateNoteDTO.Title,
                 UserId = updateNoteDTO.UserId,
+                CreatedDate = updateNoteDTO.CreatedDate
 
             };
             _context.TBL_Notes.Update(note);
@@ -62,7 +64,7 @@ namespace NoteApp.Service.Controllers
         public ActionResult RemoveNote(int id)
         {
             var note = _context.TBL_Notes.Where(x => x.Id == id).FirstOrDefault();
-            _context.TBL_Notes.Remove(note);
+             _context.TBL_Notes.Remove(note);
             _context.SaveChanges();
             return Ok();
         }

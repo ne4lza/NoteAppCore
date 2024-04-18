@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "AddNote";
+}
+
+<form method="post" asp-action="AddNote" asp-controller="Main">
+    <div class="row ml-5">
+        <div class="col-6">
+            <label>Başlık:</label>
+            <input type="text" class="form-control" name="Title"  />
+        </div>
+        <div class="col-6">
+            <label>İçerik:</label>
+            <textarea rows="4" cols="50" class="form-control" name="Content"  /></textarea>
+        </div>
+        <br />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary ml-5">Yemek Ekle</button>
+
+
+</form>
