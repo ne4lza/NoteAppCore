@@ -16,19 +16,20 @@ namespace NoteApp.Service.Controllers
         {
             _context = context;
         }
-        [HttpGet("{id}")]
-        public ActionResult<List<Note>> GetNotes(int id)
+
+        [HttpGet("{notesId}")]
+        public ActionResult<List<Note>> GetNotes(int notesId)
         {
-            var query = _context.TBL_Notes.Where(x => x.UserId == id).ToList();
+            var query = _context.TBL_Notes.Where(x => x.UserId == notesId).ToList();
             return Ok(query);
         }
-        [HttpGet("{id}")]
-        public Note GetNotesById(int id)
+        [HttpGet("{noteId}")]
+        public ActionResult GetNotesById(int noteId)
         {
-            var query = _context.TBL_Notes.Where(x => x.UserId == id).FirstOrDefault();
-            return query;
+            var query = _context.TBL_Notes.Where(x => x.UserId == noteId).FirstOrDefault();
+            return Ok(query);
         }
-        [HttpPost]
+        [HttpPost("AddNote")]
         public ActionResult AddNote(AddNoteDto addNoteDto)
         {
             Note note = new Note()

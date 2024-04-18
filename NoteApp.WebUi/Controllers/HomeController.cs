@@ -36,7 +36,7 @@ namespace NoteApp.WebUi.Controllers
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = _httpClientFactory.CreateClient();
-            var response = await client.PostAsync("https://localhost:7067/api/auth", content);
+            var response = await client.PostAsync("https://localhost:7068/api/auth/Login", content);
 
             if (response.IsSuccessStatusCode)
             {

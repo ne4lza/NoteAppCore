@@ -16,7 +16,8 @@ namespace NoteApp.Service.Controllers
         {
             _context = context;
         }
-        [HttpPost]
+
+        [HttpPost("Login")]
         public IActionResult Login(AuthUserDto authUserDto)
         {
             var query = _context.TBL_Users.Where(
@@ -40,7 +41,8 @@ namespace NoteApp.Service.Controllers
            return NotFound();
 
         }
-        [HttpPost]
+
+        [HttpPost("AddUser")]
         public IActionResult AddUser(AddUserDto addUserDto) 
         {
             var existUser = _context.TBL_Users.Where(x=>x.UserUserName == addUserDto.UserUserName).FirstOrDefault();
